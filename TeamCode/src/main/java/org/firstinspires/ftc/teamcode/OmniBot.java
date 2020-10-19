@@ -45,14 +45,17 @@ public class OmniBot extends LinearOpMode {
 
         /* insert your driving code here or whatever */
         while (opModeIsActive()) {
+
             // I'm pretty sure I have to change this OpMode to extend CommandOpMode instead of LinearOpMode to use these,
             // so while they would be much more convienient, I really don't want to go through the process of
             // setting up subsystems and commands to use FTCLib properly, so for now we're sticking with this.
+
             /* aButton.whenPressed(this::incrementMultiplier);
             bButton.whenPressed(this::decrementMultiplier); */
-            if (gamepad1.A) {
+
+            if (gamepad1Ex.getButton(GamepadKeys.Button.A)) {
                 incrementMultiplier();
-            } else if (gamepad1.B) {
+            } else if (gamepad1Ex.getButton(GamepadKeys.Button.B)) {
                 decrementMultiplier();
             }
 
@@ -77,9 +80,9 @@ public class OmniBot extends LinearOpMode {
                 right /= max;
             }
 
-            leftMotor.setVelocity(left);
-            rightMotor.setVelocity(right);
-            centerMotor.setVelocity(strafe);
+            leftMotor.setVelocity(left*speed_multiplier);
+            rightMotor.setVelocity(right*speed_multiplier);
+            centerMotor.setVelocity(strafe*speed_multiplier);
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
             telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
