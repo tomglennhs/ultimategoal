@@ -87,3 +87,9 @@ lint/tmp/
 # lint/reports/
 
 .DS_Store
+
+# VSCode project config files
+.classpath
+.project
+.factorypath
+.settings
