@@ -21,20 +21,13 @@ public class OmniBot extends LinearOpMode {
 
         double drive, turn, left, right, max, strafe;
         GamepadEx gamepad1Ex = new GamepadEx(gamepad1);
-        MotorEx leftMotor = new MotorEx(hardwareMap, "Left_Motor");
-        MotorEx centerMotor = new MotorEx(hardwareMap, "Center_Motor");
-        MotorEx rightMotor = new MotorEx(hardwareMap, "Right_Motor");
+        Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
+        Motor centerMotor = new Motor(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
+        Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
 
-        leftMotor.setRunMode(Motor.RunMode.VelocityControl);
-        centerMotor.setRunMode(Motor.RunMode.VelocityControl);
-        rightMotor.setRunMode(Motor.RunMode.VelocityControl);
-
-        GamepadButton aButton = new GamepadButton(
-                gamepad1Ex, GamepadKeys.Button.A
-        );
-        GamepadButton bButton = new GamepadButton(
-                gamepad1Ex, GamepadKeys.Button.B
-        );
+//        leftMotor.setRunMode(Motor.RunMode.VelocityControl);
+//        centerMotor.setRunMode(Motor.RunMode.VelocityControl);
+//        rightMotor.setRunMode(Motor.RunMode.VelocityControl)
 
 
         telemetry.addData("Status", "Ready");
@@ -53,11 +46,11 @@ public class OmniBot extends LinearOpMode {
             /* aButton.whenPressed(this::incrementMultiplier);
             bButton.whenPressed(this::decrementMultiplier); */
 
-            if (gamepad1Ex.getButton(GamepadKeys.Button.A)) {
-                incrementMultiplier();
-            } else if (gamepad1Ex.getButton(GamepadKeys.Button.B)) {
-                decrementMultiplier();
-            }
+//            if (gamepad1Ex.getButton(GamepadKeys.Button.A)) {
+//                incrementMultiplier();
+//            } else if (gamepad1Ex.getButton(GamepadKeys.Button.B)) {
+//                decrementMultiplier();
+//            }
 
             /* The following code is mostly copy-pasted verbatim from the PushbotTeleopPOV_Linear sample OpMode. */
 
@@ -80,14 +73,15 @@ public class OmniBot extends LinearOpMode {
                 right /= max;
             }
 
-            leftMotor.setVelocity(left*speed_multiplier);
-            rightMotor.setVelocity(right*speed_multiplier);
-            centerMotor.setVelocity(strafe*speed_multiplier);
+            leftMotor.set(left*speed_multiplier);
+            rightMotor.set(right*speed_multiplier);
+            centerMotor.set(strafe*speed_multiplier);
+
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
-            telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
-            telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
-            telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
+//            telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
+//            telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
+//            telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
             telemetry.update();
 
         }
