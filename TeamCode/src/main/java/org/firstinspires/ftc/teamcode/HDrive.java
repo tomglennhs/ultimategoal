@@ -8,8 +8,8 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "OmniBot", group = "Drive")
-public class OmniBot extends LinearOpMode {
+@TeleOp(name = "HDrive", group = "Drive")
+public class HDDrive extends LinearOpMode {
 
     double speed_multiplier = 1.0;
 
