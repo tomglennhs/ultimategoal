@@ -6,10 +6,11 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.arcrobotics.ftclib.util.MathUtils;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "HDrive", group = "Drive")
-public class HDDrive extends LinearOpMode {
+public class HDrive extends LinearOpMode {
 
     double speed_multiplier = 1.0;
 
@@ -24,10 +25,6 @@ public class HDDrive extends LinearOpMode {
         Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
         Motor centerMotor = new Motor(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
         Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
-
-//        leftMotor.setRunMode(Motor.RunMode.VelocityControl);
-//        centerMotor.setRunMode(Motor.RunMode.VelocityControl);
-//        rightMotor.setRunMode(Motor.RunMode.VelocityControl)
 
 
         telemetry.addData("Status", "Ready");
@@ -57,7 +54,7 @@ public class HDDrive extends LinearOpMode {
             // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             // This way it's also easy to just drive straight, or just turn.
-            drive = -gamepad1.left_stick_y;
+            drive = MathUtils.clamp(gamepad1.left_stick_y - gamepad1.right_stick_y, -1, 1);
             turn  =  gamepad1.right_stick_x;
             strafe = gamepad1.left_stick_x;
 
@@ -79,24 +76,12 @@ public class HDDrive extends LinearOpMode {
 
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
-//            telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
-//            telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
-//            telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
+            telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
+            telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
+            telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
             telemetry.update();
 
         }
 
-    }
-
-    public void incrementMultiplier() {
-        if (!(speed_multiplier >= 1.0)) {
-            speed_multiplier = speed_multiplier + 0.1;
-        }
-    }
-
-    public void decrementMultiplier() {
-        if (!(speed_multiplier <= 0.0)) {
-            speed_multiplier = speed_multiplier - 0.1;
-        }
     }
 }
