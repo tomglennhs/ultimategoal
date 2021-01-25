@@ -13,6 +13,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class HDrive extends LinearOpMode {
 
     double speed_multiplier = 1.0;
+    double shooter_on = 1.0;
+    double shooter_off = 0.0;
+    double shooter_power = shooter_off;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,6 +28,7 @@ public class HDrive extends LinearOpMode {
         Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
         Motor centerMotor = new Motor(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
         Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
+        Motor shooter = new Motor(hardwareMap, "shooter", Motor.GoBILDA.NONE);
 
 
         telemetry.addData("Status", "Ready");
@@ -69,16 +73,26 @@ public class HDrive extends LinearOpMode {
                 left /= max;
                 right /= max;
             }
-
+        
+               
+            
+            if (gamepad1Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+                shooter_power = shooter_off;
+            } else if (gamepad1Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+                shooter_power = shooter_on;
+           }
+    
             leftMotor.set(left*speed_multiplier);
             rightMotor.set(right*speed_multiplier);
             centerMotor.set(strafe*speed_multiplier);
+            shooter.set(shooter_power);
 
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
             telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
             telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
             telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
+            telemetry.addData("Shooter Motor Velocity", shooter.getVelocity());
             telemetry.update();
 
         }
