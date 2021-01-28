@@ -1,0 +1,5 @@
+{
+    "android-dev-ext.trace": true,
+    "gradle.debug": true,
+    "gradle.nestedProjects": true
+}
