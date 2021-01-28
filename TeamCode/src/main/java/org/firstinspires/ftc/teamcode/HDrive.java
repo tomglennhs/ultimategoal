@@ -25,10 +25,10 @@ public class HDrive extends LinearOpMode {
 
         double drive, turn, left, right, max, strafe;
         GamepadEx gamepad1Ex = new GamepadEx(gamepad1);
-        Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
-        Motor centerMotor = new Motor(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
-        Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
-        Motor shooter = new Motor(hardwareMap, "shooter", Motor.GoBILDA.NONE);
+        MotorEx leftMotor = new MotorEx(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
+        MotorEx centerMotor = new MotorEx(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
+        MotorEx rightMotor = new MotorEx(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
+        MotorEx shooter = new MotorEx(hardwareMap, "shooter", Motor.GoBILDA.NONE);
 
 
         telemetry.addData("Status", "Ready");
