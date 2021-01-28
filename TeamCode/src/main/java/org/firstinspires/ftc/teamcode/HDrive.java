@@ -34,30 +34,12 @@ public class HDrive extends LinearOpMode {
         telemetry.addData("Status", "Ready");
         telemetry.update();
 
-        // keep this here, this indicates the end of the init
         waitForStart();
 
-        /* insert your driving code here or whatever */
         while (opModeIsActive()) {
-
-            // I'm pretty sure I have to change this OpMode to extend CommandOpMode instead of LinearOpMode to use these,
-            // so while they would be much more convienient, I really don't want to go through the process of
-            // setting up subsystems and commands to use FTCLib properly, so for now we're sticking with this.
-
-            /* aButton.whenPressed(this::incrementMultiplier);
-            bButton.whenPressed(this::decrementMultiplier); */
-
-//            if (gamepad1Ex.getButton(GamepadKeys.Button.A)) {
-//                incrementMultiplier();
-//            } else if (gamepad1Ex.getButton(GamepadKeys.Button.B)) {
-//                decrementMultiplier();
-//            }
 
             /* The following code is mostly copy-pasted verbatim from the PushbotTeleopPOV_Linear sample OpMode. */
 
-            // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
-            // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
-            // This way it's also easy to just drive straight, or just turn.
             drive = MathUtils.clamp(gamepad1.left_stick_y - gamepad1.right_stick_y, -1, 1);
             turn  =  gamepad1.right_stick_x;
             strafe = gamepad1.left_stick_x;
@@ -74,8 +56,6 @@ public class HDrive extends LinearOpMode {
                 right /= max;
             }
         
-               
-            
             if (gamepad1Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
                 shooter_power = shooter_off;
             } else if (gamepad1Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
