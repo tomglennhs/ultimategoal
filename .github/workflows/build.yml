@@ -29,11 +29,13 @@ jobs:
     - name: Upload Release APK
       uses: actions/upload-artifact@v2.2.2
       with:
+        name: RC-release.apk
         path: ./TeamCode/build/outputs/apk/release/TeamCode-release.apk
         if-no-files-found: warn
 
     - name: Upload Debug APK
       uses: actions/upload-artifact@v2.2.2
       with:
+        name: RC-debug.apk
         path: ./TeamCode/build/outputs/apk/debug/TeamCode-debug.apk
         if-no-files-found: warn
