@@ -35,7 +35,7 @@ public class TempClaw {
     }
 
     public void angleSpeed(double speed) {
-        angle.set(speed*speedMultiplier);
+        angle.setVelocity(speed*speedMultiplier);
     }
 
 }
