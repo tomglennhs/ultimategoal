@@ -24,12 +24,17 @@ jobs:
 
     - name: Build!
       id: build_apk
-      run: ./gradlew --no-daemon build
+      run: ./gradlew --no-daemon -x lint build
 
-    - name: Upload APKs
+    - name: Upload Release APK
       uses: actions/upload-artifact@v2.2.2
       with:
-        path: |
-          ./TeamCode/build/outputs/apk/release/TeamCode-release.apk
-          ./TeamCode/build/outputs/apk/debug/TeamCode-debug.apk
+        path: ./TeamCode/build/outputs/apk/release/TeamCode-release.apk
+        if-no-files-found: warn
+        
+        
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        path: ./TeamCode/build/outputs/apk/debug/TeamCode-debug.apk
         if-no-files-found: warn
