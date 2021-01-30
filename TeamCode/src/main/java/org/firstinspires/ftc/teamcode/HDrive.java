@@ -6,7 +6,10 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.teamcode.TempClaw;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.arcrobotics.ftclib.util.MathUtils;
+import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "HDrive", group = "Drive")
@@ -19,17 +22,21 @@ public class HDrive extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        // Place your init code here. Initialize motors and sensors here
         telemetry.addData("Status", "Starting...");
         telemetry.update();
 
         double drive, turn, left, right, max, strafe;
         GamepadEx gamepad1Ex = new GamepadEx(gamepad1);
+        GamepadEx gamepad2Ex = new GamepadEx(gamepad2);
         MotorEx leftMotor = new MotorEx(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
         MotorEx centerMotor = new MotorEx(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
         MotorEx rightMotor = new MotorEx(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
         MotorEx shooter = new MotorEx(hardwareMap, "shooter", Motor.GoBILDA.NONE);
 
+        Servo grabber = hardwareMap.get(Servo.class, "serve");
+        MotorEx claw_angle = new MotorEx(hardwareMap, "claw", Motor.GoBILDA.NONE);
+
+        TempClaw claw = new TempClaw(grabber, claw_angle);
 
         telemetry.addData("Status", "Ready");
         telemetry.update();
@@ -62,11 +69,19 @@ public class HDrive extends LinearOpMode {
                 shooter_power = shooter_on;
            }
     
+
+           if (gamepad2Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+            claw.openClaw();
+        } else if (gamepad1Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+            claw.closeClaw();
+       }
+
             leftMotor.set(left*speed_multiplier);
             rightMotor.set(right*speed_multiplier);
             centerMotor.set(strafe*speed_multiplier);
-            shooter.set(shooter_power);
+            // shooter.set(shooter_power);
 
+            claw.angleSpeed(MathUtils.clamp(gamepad2.right_trigger - gamepad2.left_trigger, -1, 1));
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
             telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
@@ -76,6 +91,6 @@ public class HDrive extends LinearOpMode {
             telemetry.update();
 
         }
-
     }
 }
+
