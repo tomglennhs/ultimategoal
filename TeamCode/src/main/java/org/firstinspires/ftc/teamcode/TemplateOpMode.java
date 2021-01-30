@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 
 // delete this next line once you've made a copy of the class
 @Disabled
@@ -11,6 +13,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class TemplateOpMode extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         // Place your init code here. Initialize motors and sensors here
         MotorEx motor = new MotorEx(hardwareMap, "motor");
 
