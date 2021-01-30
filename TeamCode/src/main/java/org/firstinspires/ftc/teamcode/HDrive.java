@@ -44,53 +44,43 @@ public class HDrive extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            telemetry.addData("Started Loop", "yes");
-            telemetry.update();
 
             /* The following code is mostly copy-pasted verbatim from the PushbotTeleopPOV_Linear sample OpMode. */
 
-            drive = MathUtils.clamp(-gamepad1Ex.getLeftY() - -gamepad1Ex.getRightY(), -1, 1);
-            turn  =  -gamepad1Ex.getRightX();
-            strafe = -gamepad1Ex.getLeftX();
+            drive = MathUtils.clamp(gamepad1Ex.getLeftY() + gamepad1Ex.getRightY(), -1, 1);
+            turn  =  gamepad1Ex.getRightX();
+            strafe = gamepad1Ex.getLeftX();
 
-            // Combine drive and turn for blended motion.
-            left  = drive + turn;
-            right = drive - turn;
-
-            // Normalize the values so neither exceed +/- 1.0
-            max = Math.max(Math.abs(left), Math.abs(right));
-            if (max > 1.0)
-            {
-                left /= max;
-                right /= max;
-            }
+            left = MathUtils.clamp(drive-turn, -1, 1);
+            right = MathUtils.clamp(drive+turn, -1, 1);
         
             if (gamepad1Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
                 shooter_power = shooter_off;
             } else if (gamepad1Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
                 shooter_power = shooter_on;
-           }
+            }
     
 
-           if (gamepad2Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
-            claw.openClaw();
-        } else if (gamepad2Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
-            claw.closeClaw();
-       }
+            if (gamepad2Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+                claw.openClaw();
+            } else if (gamepad2Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+                claw.closeClaw();
+            }
 
-            leftMotor.setVelocity(left*speed_multiplier);
-            rightMotor.setVelocity(right*speed_multiplier);
-            centerMotor.setVelocity(strafe*speed_multiplier);
-            shooter.setVelocity(shooter_power);
+            leftMotor.set(right*speed_multiplier);
+            rightMotor.set(left*speed_multiplier);
+            centerMotor.set(strafe*speed_multiplier);
+            // shooter.set(shooter_power);
 
-            angleSpeed = MathUtils.clamp(gamepad2Ex.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) - gamepadEx.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), -1, 1);
+            angleSpeed = MathUtils.clamp(gamepad2Ex.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) - gamepad2Ex.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), -1, 1);
             claw.angleSpeed(angleSpeed);
 
             telemetry.addData("Speed Multiplier", speed_multiplier);
-            telemetry.addData("Center Motor Velocity", centerMotor.getVelocity());
-            telemetry.addData("Left Motor Velocity", leftMotor.getVelocity());
-            telemetry.addData("Right Motor Velocity", rightMotor.getVelocity());
-            telemetry.addData("Shooter Motor Velocity", shooter.getVelocity());
+            telemetry.addData("drive", drive);
+            telemetry.addData("turn", turn);
+            telemetry.addData("strafe", strafe);
+            telemetry.addData("left", left);
+            telemetry.addData("right", right);
             telemetry.update();
 
         }

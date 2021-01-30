@@ -1,5 +1,6 @@
 {
     "android-dev-ext.trace": true,
     "gradle.debug": true,
-    "gradle.nestedProjects": true
+    "gradle.nestedProjects": true,
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

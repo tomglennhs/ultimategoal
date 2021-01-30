@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class TempClaw {
-    private double speedMultiplier = 0.1;
-    private double clawOpen = 0.0;
+    private double speedMultiplier = 0.25;
+    private double clawOpen = -1.0;
     private double clawClose = 1.0;
     private Servo grabber;
     private MotorEx angle;
@@ -15,6 +16,7 @@ public class TempClaw {
     TempClaw(Servo g, MotorEx a) {
         grabber = g;
         angle = a;
+        // a.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
         openClaw();
     }
 
@@ -35,7 +37,7 @@ public class TempClaw {
     }
 
     public void angleSpeed(double speed) {
-        angle.setVelocity(speed*speedMultiplier);
+        angle.set(speed*speedMultiplier);
     }
 
 }
