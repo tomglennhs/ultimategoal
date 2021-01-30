@@ -31,9 +31,8 @@ jobs:
       with:
         path: ./TeamCode/build/outputs/apk/release/TeamCode-release.apk
         if-no-files-found: warn
-        
-        
-    - name: Upload Release APK
+
+    - name: Upload Debug APK
       uses: actions/upload-artifact@v2.2.2
       with:
         path: ./TeamCode/build/outputs/apk/debug/TeamCode-debug.apk
