@@ -41,6 +41,11 @@ public class HDrive extends LinearOpMode {
         Servo grabber = hardwareMap.get(Servo.class, "serve");
         Motor claw_angle = new Motor(hardwareMap, "claw", Motor.GoBILDA.NONE);
 
+        List<LynxModule> allHubs = hardwareMap.getAll(LynxModule.class);
+        for (LynxModule module : allHubs) {
+            module.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL);
+        }
+
         TempClaw claw = new TempClaw(grabber, claw_angle);
         Motor[] motors = {leftMotor, rightMotor};
         // i would use FTCLib's HDrive drivebase but it was being weird with strafing for some reason.
@@ -52,7 +57,10 @@ public class HDrive extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-
+            for (LynxModule module : allHubs) {
+                module.clearBulkCache();
+            }
+            
             drive = MathUtils.clamp(-gamepad1Ex.getLeftY() + gamepad1Ex.getRightY(), -1, 1);
             turn  =  -gamepad1Ex.getLeftX();
             strafe = -gamepad1Ex.getRightX();
