@@ -10,6 +10,9 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import com.arcrobotics.ftclib.util.Timing.Timer;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 @Autonomous(name="HDrive: Move Fwd for 10 secs", group="HDrive", preselectTeleOp="HDrive Teleop")
 public class HDrivePark extends LinearOpMode {
@@ -18,9 +21,14 @@ public class HDrivePark extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        long raiseClawSecs = 0.5;
-        long mvFwdSecs = 10.0;
-        long totalSecs = raiseClawSecs+mvFwdSecs;
+
+        // 1 secs == 1000 ms
+        long raiseClawMS = 1000;
+
+        // 10 secs == 10000 ms
+        long mvFwdMS = 10000;
+
+        long totalMSecs = raiseClawMS+mvFwdMS;
 
         long currentTime = 0;
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -28,10 +36,10 @@ public class HDrivePark extends LinearOpMode {
         telemetry.addData("Status", "Initializing...");
         telemetry.update();
         
-        Timer time = new Timer(totalSecs);
+        Timer time = new Timer(totalMSecs, TimeUnit.MILLISECONDS);
 
         double turn = 0.0;
-        double drive, left, right, max, strafe, angleSpeed;
+        double drive;
         Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
         Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
 
@@ -49,8 +57,9 @@ public class HDrivePark extends LinearOpMode {
         DifferentialDrive dt = new DifferentialDrive(true, motors);
 
         telemetry.addData("Status", "Ready To Run");
-        telemetry.addData("1. Raise Claw (secs)", raiseClawSecs);
-        telemetry.addData("2. Move Bot Forward (secs)", mvFwdSecs);
+        telemetry.addData("Remaining Time on Timer (secs)", (double)((totalMSecs-currentTime)/1000.0));
+        telemetry.addData("1. Raise Claw (secs)", (double)(raiseClawMS/1000.0));
+        telemetry.addData("2. Move Bot Forward (secs)", (double)(mvFwdMS/1000.0));
         telemetry.update();
 
         waitForStart();
@@ -62,16 +71,16 @@ public class HDrivePark extends LinearOpMode {
 
             currentTime = time.currentTime();
             
-            if (!time.isDone()) {
+            if (!time.done()) {
                 // raises claw first so it doesn't drag on the ground
-                if (currentTime <= raiseClawSecs && currentTime > 0) {
+                if (currentTime <= raiseClawMS && currentTime > 0) {
                     claw.angleSpeed(0.5);
                 } else {
                     claw.angleSpeed(0.0);
                 }
 
                 // moves robot forward for x amount of secs after raising claw
-                if (time.currentTime() <= mvFwdSecs && time.currentTime() >= raiseClawSecs) {
+                if (time.currentTime() <= mvFwdMS && time.currentTime() >= raiseClawMS) {
                     drive = 1;
                 } else {
                     drive = 0;
@@ -80,9 +89,9 @@ public class HDrivePark extends LinearOpMode {
                 dt.arcadeDrive(drive, turn);
             }
             
-            telemetry.addData("Remaining Time on Timer", totalSecs-currentTime);
-            telemetry.addData("1. Raise Claw (secs)", raiseClawSecs);
-            telemetry.addData("2. Move Bot Forward (secs)", mvFwdSecs);
+            telemetry.addData("Remaining Time on Timer (secs)", (double)((totalMSecs-currentTime)/1000.0));
+            telemetry.addData("1. Raise Claw (secs)", (double)(raiseClawMS/1000.0));
+            telemetry.addData("2. Move Bot Forward (secs)", (double)(mvFwdMS/1000.0));
             telemetry.update();
 
         }

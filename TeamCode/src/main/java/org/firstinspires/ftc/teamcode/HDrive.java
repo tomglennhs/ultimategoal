@@ -20,11 +20,6 @@ import java.util.List;
 @TeleOp(name = "HDrive Teleop", group = "HDrive")
 public class HDrive extends LinearOpMode {
 
-    double speed_multiplier = 1.0;
-    double shooter_on = 1.0;
-    double shooter_off = 0.0;
-    double shooter_power = shooter_off;
-
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -32,7 +27,12 @@ public class HDrive extends LinearOpMode {
         telemetry.addData("Status", "Initializing...");
         telemetry.update();
         
-        double drive, turn, left, right, max, strafe, angleSpeed;
+        double speed_multiplier = 1.0;
+        double shooter_on = 1.0;
+        double shooter_off = 0.0;
+        double shooter_power = shooter_off;
+
+        double drive, turn, strafe, angleSpeed;
         GamepadEx gamepad1Ex = new GamepadEx(gamepad1);
         GamepadEx gamepad2Ex = new GamepadEx(gamepad2);
         Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
