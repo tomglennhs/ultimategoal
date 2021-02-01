@@ -5,7 +5,6 @@ import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.TempClaw;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -18,7 +17,7 @@ import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import java.util.Iterator;
 import java.util.List;
 
-@TeleOp(name = "HDrive", group = "Drive")
+@TeleOp(name = "HDrive Teleop", group = "HDrive")
 public class HDrive extends LinearOpMode {
 
     double speed_multiplier = 1.0;
