@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.TempClaw;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 @Autonomous(name="HDrive: Move Fwd for 10 secs", group="HDrive", preselectTeleOp="HDrive Teleop")
+@Disabled
 public class HDrivePark extends LinearOpMode {
     // this is incredibly lazy and i'm going to work on a better autonomous before meet 2.
     // this should allow us to park which is definitely better than nothing, but definitely not great either
@@ -23,14 +25,14 @@ public class HDrivePark extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         // 1 secs == 1000 ms
-        long raiseClawMS = 1000;
+        long raiseClawMS = 1000L;
 
         // 10 secs == 10000 ms
-        long mvFwdMS = 10000;
+        long mvFwdMS = 10000L;
 
-        long totalMSecs = raiseClawMS+mvFwdMS;
+        long totalMSecs = raiseClawMS + mvFwdMS;
 
-        long currentTime = 0;
+        long currentTime = 0L;
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         telemetry.addData("Status", "Initializing...");
@@ -51,19 +53,23 @@ public class HDrivePark extends LinearOpMode {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL);
         }
 
-        TempClaw claw = new TempClaw(grabber, claw_angle);
+        TempClaw claw = new TempClaw(grabber, claw_angle, false);
         Motor[] motors = {leftMotor, rightMotor};
         // i would use FTCLib's HDrive drivebase but it was being weird with strafing for some reason.
         DifferentialDrive dt = new DifferentialDrive(true, motors);
 
+        currentTime = time.currentTime();
+
         telemetry.addData("Status", "Ready To Run");
         telemetry.addData("Remaining Time on Timer (secs)", (double)((totalMSecs-currentTime)/1000.0));
+        telemetry.addData("Current time (msecs)", currentTime);
         telemetry.addData("1. Raise Claw (secs)", (double)(raiseClawMS/1000.0));
         telemetry.addData("2. Move Bot Forward (secs)", (double)(mvFwdMS/1000.0));
         telemetry.update();
 
         waitForStart();
-        time.start();
+        time.resume();
+
         while (opModeIsActive()) {
             for (LynxModule module : allHubs) {
                 module.clearBulkCache();
@@ -74,7 +80,7 @@ public class HDrivePark extends LinearOpMode {
             if (!time.done()) {
                 // raises claw first so it doesn't drag on the ground
                 if (currentTime <= raiseClawMS && currentTime > 0) {
-                    claw.angleSpeed(0.5);
+                    claw.angleSpeed(-0.5);
                 } else {
                     claw.angleSpeed(0.0);
                 }
@@ -90,6 +96,7 @@ public class HDrivePark extends LinearOpMode {
             }
             
             telemetry.addData("Remaining Time on Timer (secs)", (double)((totalMSecs-currentTime)/1000.0));
+            telemetry.addData("Current time (msecs)", currentTime);
             telemetry.addData("1. Raise Claw (secs)", (double)(raiseClawMS/1000.0));
             telemetry.addData("2. Move Bot Forward (secs)", (double)(mvFwdMS/1000.0));
             telemetry.update();

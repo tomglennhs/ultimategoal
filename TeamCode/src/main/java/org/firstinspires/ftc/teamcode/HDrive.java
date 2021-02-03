@@ -32,9 +32,9 @@ public class HDrive extends LinearOpMode {
         double shooter_off = 0.0;
         double shooter_power = shooter_off;
 
-        double drive, turn, strafe, angleSpeed;
-        GamepadEx gamepad1Ex = new GamepadEx(gamepad1);
-        GamepadEx gamepad2Ex = new GamepadEx(gamepad2);
+        double drive, turn, strafe, angleSpeed, angleSpeed1, angleSpeed2;
+        GamepadEx driver1 = new GamepadEx(gamepad1);
+        GamepadEx driver2 = new GamepadEx(gamepad2);
         Motor leftMotor = new Motor(hardwareMap, "Left_Motor", Motor.GoBILDA.NONE);
         Motor centerMotor = new Motor(hardwareMap, "Center_Motor", Motor.GoBILDA.NONE);
         Motor rightMotor = new Motor(hardwareMap, "Right_Motor", Motor.GoBILDA.NONE);
@@ -63,27 +63,33 @@ public class HDrive extends LinearOpMode {
                 module.clearBulkCache();
             }
             
-            drive = MathUtils.clamp(-gamepad1Ex.getLeftY() + gamepad1Ex.getRightY(), -1, 1);
-            turn  =  -gamepad1Ex.getLeftX();
-            strafe = -gamepad1Ex.getRightX();
+            drive = MathUtils.clamp(-driver1.getLeftY() + driver1.getRightY(), -1, 1);
+            turn  =  -driver1.getLeftX();
+            strafe = -driver1.getRightX();
         
-            if (gamepad1Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+            if (driver1.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
                 shooter_power = shooter_off;
-            } else if (gamepad1Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+            } else if (driver1.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
                 shooter_power = shooter_on;
             }
 
-            if (gamepad2Ex.getButton(GamepadKeys.Button.LEFT_BUMPER) || gamepad1Ex.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
+            if (driver2.getButton(GamepadKeys.Button.LEFT_BUMPER) || driver1.getButton(GamepadKeys.Button.LEFT_BUMPER)) {
                 claw.openClaw();
-            } else if (gamepad2Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER) || gamepad2Ex.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
+            } else if (driver2.getButton(GamepadKeys.Button.RIGHT_BUMPER) || driver1.getButton(GamepadKeys.Button.RIGHT_BUMPER)) {
                 claw.closeClaw();
+            }
+
+            if (driver2.getButton(GamepadKeys.Button.X) || driver1.getButton(GamepadKeys.Button.X)) {
+                claw.toggleClaw();
             }
 
             dt.arcadeDrive(drive, turn);
             centerMotor.set(strafe);
             // shooter.set(shooter_power);
 
-            angleSpeed = MathUtils.clamp(gamepad2Ex.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) - gamepad2Ex.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), -1, 1);
+            angleSpeed1 = MathUtils.clamp(driver2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) - driver2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), -1, 1);
+            angleSpeed2 = MathUtils.clamp(driver1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) - driver1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER), -1, 1);
+            angleSpeed = MathUtils.clamp(angleSpeed1+angleSpeed2, -1, 1);
             claw.angleSpeed(angleSpeed);
 
             // telemetry.addData("Speed Multiplier", speed_multiplier);

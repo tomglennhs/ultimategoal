@@ -72,7 +72,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 @Autonomous(name="Main Auton", group="HDrive", preselectTeleOp="HDrive Teleop")
-public class auton2 extends LinearOpMode {
+@Disabled
+public class PrimaryAuton extends LinearOpMode {
+
     public double distanceL, distanceR;
 
     /* Declare OpMode members. */
@@ -85,7 +87,7 @@ public class auton2 extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.6;
+    static final double     DRIVE_SPEED             = 0.7;
     static final double     TURN_SPEED              = 0.5;
 
     public void initThings() {
@@ -134,7 +136,8 @@ public class auton2 extends LinearOpMode {
 //        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         sleep(1000);     // pause for servos to move
-
+        telemetry.addData("l", distanceL);
+        telemetry.addData("r", distanceR);
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
@@ -168,7 +171,7 @@ public class auton2 extends LinearOpMode {
 
             // reset the timeout time and start motion.
             runtime.reset();
-            l.motor.setPower(Math.abs(speed)*1.1);
+            l.motor.setPower(Math.abs(speed));
             r.motor.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
@@ -182,11 +185,11 @@ public class auton2 extends LinearOpMode {
                     (l.motor.isBusy() && r.motor.isBusy())) {
 
                 // Display it for the driver.
-                t.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
-                t.addData("Path2",  "Running at %7d :%7d",
-                        l.motor.getCurrentPosition(),
-                        r.motor.getCurrentPosition());
-                t.update();
+//                t.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
+//                t.addData("Path2",  "Running at %7d :%7d",
+//                        l.motor.getCurrentPosition(),
+//                        r.motor.getCurrentPosition());
+//                t.update();
             }
 
             // Stop all motion;

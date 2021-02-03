@@ -45,7 +45,7 @@ public class Mechanum extends LinearOpMode {
         Intake ringIntake = Intake.ON;
 
         // Initializing gyroscope
-        BNO055IMU imu = hardwareMap.get(BNO055IMU.class, "imu");;
+        BNO055IMU imu = hardwareMap.get(BNO055IMU.class, "imu");
 
         MotorEx frontLeft = new MotorEx(hardwareMap, "FL", Motor.GoBILDA.NONE);
         MotorEx frontRight = new MotorEx(hardwareMap, "FR", Motor.GoBILDA.NONE);
