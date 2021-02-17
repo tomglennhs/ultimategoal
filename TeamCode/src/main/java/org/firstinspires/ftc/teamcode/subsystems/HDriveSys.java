@@ -5,7 +5,7 @@ import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 
-public class HDrive extends SubsystemBase {
+public class HDriveSys extends SubsystemBase {
     private MotorEx l, r, c;
     private DifferentialDrive dt;
     private Encoder leftEnc, rightEnc;
@@ -15,7 +15,7 @@ public class HDrive extends SubsystemBase {
     // since this doesn't need to be mutated we declare this as final
     static final double WHEEL_DIAMETER = 90.0 / 25.4;
 
-    public HDrive(final HardwareMap hMap) {
+    public HDriveSys(final HardwareMap hMap) {
         l = new MotorEx(hMap, "Left_Motor");
         r = new MotorEx(hMap, "Right_Motor");
         l.setInverted(false);
