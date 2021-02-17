@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "Auton B", group = "HDrive", preselectTeleOp="HDrive Teleop")
+@Autonomous(name = "HDrive B (1 Ring)", group = "HDrive", preselectTeleOp="HDrive Teleop")
 public class box2 extends PrimaryAuton {
     @Override
     public void initThings() {
