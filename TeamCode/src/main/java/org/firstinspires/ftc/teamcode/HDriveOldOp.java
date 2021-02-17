@@ -17,8 +17,8 @@ import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import java.util.Iterator;
 import java.util.List;
 
-@TeleOp(name = "HDrive Teleop", group = "HDrive")
-public class HDrive extends LinearOpMode {
+@TeleOp(name = "HDrive Teleop (old)", group = "HDrive")
+public class HDriveOldOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
