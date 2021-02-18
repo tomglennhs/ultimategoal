@@ -16,9 +16,11 @@ apply from: '../build.common.gradle'
 
 repositories {
     maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
+    maven { url 'https://jitpack.com' }
 }
 
 dependencies {
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
     implementation 'com.arcrobotics:ftclib:1.1.6' // Replace 1.1.0 with the latest release
+    implementation 'com.github.serivesmejia:EOCV-Sim:2.0.2'
 }
