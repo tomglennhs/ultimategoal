@@ -18,10 +18,12 @@ public class HDriveSys extends SubsystemBase {
     public HDriveSys(final HardwareMap hMap) {
         l = new MotorEx(hMap, "Left_Motor");
         r = new MotorEx(hMap, "Right_Motor");
+        c = new MotorEx(hMap, "Center_Motor");
         l.setInverted(false);
         r.setInverted(true);
         leftEnc = l.encoder;
         rightEnc = r.encoder;
+
 
         MotorEx[] motors = {l, r};
         resetEncoders();
