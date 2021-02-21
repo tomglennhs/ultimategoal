@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-java@v1
         name: Configure Java
         with:
-          java-version: 8
+          java-version: 11
       - uses: axel-op/googlejavaformat-action@v3
         name: Format
         with:
