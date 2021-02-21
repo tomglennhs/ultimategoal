@@ -1,3 +1,6 @@
+[![.github/workflows/build.yml](https://github.com/grizzlybots11918/ultimategoal/actions/workflows/build.yml/badge.svg)](https://github.com/grizzlybots11918/ultimategoal/actions/workflows/build.yml)
+
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the Ultimate Goal (2020-2021) competition season.
