@@ -13,8 +13,8 @@ public class ShooterSys extends SubsystemBase {
     private final double runVelocity = 24.0;
     private final double stopVelocity = 0.0;
     private final double velocityTolerance = 0.5;
-    private final maxVelocityTolerance = runVelocity + velocityTolerance;
-    private final minVelocityTolerance = runVelocity - velocityTolerance;
+    private final double maxVelocityTolerance = runVelocity + velocityTolerance;
+    private final double minVelocityTolerance = runVelocity - velocityTolerance;
 
     public ShooterSys(final HardwareMap hMap) {
         motor = new MotorEx(hMap, "shooter");
