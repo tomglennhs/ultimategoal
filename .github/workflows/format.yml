@@ -1,0 +1,15 @@
+on:
+  [pull_request, push]
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    name: Format Code with Google Java Format
+    steps:
+      - uses: actions/checkout@v2 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          # 4 spaces ftw
+          args: "--aosp"
+          commitMessage: "style: auto-format with Google Java Format"
+          version: "1.9"
