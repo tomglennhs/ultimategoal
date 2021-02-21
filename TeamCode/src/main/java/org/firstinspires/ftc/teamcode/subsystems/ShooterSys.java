@@ -18,6 +18,7 @@ public class ShooterSys extends SubsystemBase {
         motor = new MotorEx(hMap, "shooter");
         motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
         motor.setRunMode(Motor.RunMode.VelocityControl);
+        motor.setInverted(false);
         isRunning = false;
     }
 
@@ -66,11 +67,14 @@ public class ShooterSys extends SubsystemBase {
     
     public boolean readyForRing() {
         if (isRunning) {
-            private final double currentVel = getVelocity();
+            final double currentVel = getVelocity();
             return currentVel < maxVelocityTolerance && currentVel > minVelocityTolerance;
         }
         return false;
     }
 
+    public boolean getState() {
+        return isRunning;
+    }
 
 }
