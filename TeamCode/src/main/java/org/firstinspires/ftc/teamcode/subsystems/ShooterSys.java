@@ -5,8 +5,6 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import static com.arcrobotics.ftclib.hardware.motors.Motor.RunMode.VelocityControl;
-
 public class ShooterSys extends SubsystemBase {
     private final MotorEx motor;
     private boolean isRunning;
@@ -19,7 +17,7 @@ public class ShooterSys extends SubsystemBase {
     public ShooterSys(final HardwareMap hMap) {
         motor = new MotorEx(hMap, "shooter");
         motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
-        motor.setRunMode(VelocityControl);
+        motor.setRunMode(Motor.RunMode.VelocityControl);
         isRunning = false;
     }
 
