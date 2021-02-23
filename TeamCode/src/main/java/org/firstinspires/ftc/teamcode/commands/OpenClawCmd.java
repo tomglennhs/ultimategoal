@@ -7,11 +7,11 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSys;
 
 public class OpenClawCmd extends CommandBase {
-    private ClawSys ss;
+    public ClawSys ss;
     private final long openMs = 750l;
     private final long start = System.currentTimeMillis();
 
-    public OpenClaw(final ClawSys subsystem) {
+    public OpenClawCmd(final ClawSys subsystem) {
         ss = subsystem;
         addRequirements(subsystem);
     }

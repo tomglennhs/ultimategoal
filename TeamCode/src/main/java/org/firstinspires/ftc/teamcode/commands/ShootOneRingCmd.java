@@ -13,7 +13,7 @@ public class ShootOneRingCmd extends CommandBase {
     private boolean shotRing = false;
     private boolean originalShooterState;
 
-    public ShootOneRing(final ShooterSys s, final ConveyorSys c) {
+    public ShootOneRingCmd(final ShooterSys s, final ConveyorSys c) {
         conveyor = c;
         shooter = s;
         addRequirements(conveyor);

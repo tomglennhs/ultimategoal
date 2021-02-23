@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.ops;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 
@@ -11,6 +12,8 @@ import org.firstinspires.ftc.teamcode.commands.OpenClawCmd;
 import org.firstinspires.ftc.teamcode.commands.CloseClawCmd;
 import org.firstinspires.ftc.teamcode.subsystems.HDriveSys;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSys;
+
+import com.arcrobotics.ftclib.command.button.GamepadButton;
 
 @TeleOp(name = "HDrive Teleop (FTCLib)", group = "HDrive")
 public class HDriveTele extends CommandOpMode {

@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ConveyorSys;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterSys;
 
 public class ShooterOnCmd extends CommandBase {
-    private ShooterSys shooter;
-    private boolean done = false;
+    public ShooterSys shooter;
+    public boolean done = false;
 
     public ShooterOnCmd(final ShooterSys s) {
         shooter = s;
