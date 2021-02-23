@@ -13,9 +13,10 @@ public class ConveyorSys extends SubsystemBase {
     private boolean isRunning;
 
     public ConveyorSys(final HardwareMap hMap) {
-        motor = new MotorEx(hMap, "conveyor");;
+        motor = new MotorEx(hMap, "conveyor");
         motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
         motor.setRunMode(RawPower);
+        motor.setInverted(false);
         isRunning = false;
     }
 

@@ -5,26 +5,32 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import static com.arcrobotics.ftclib.hardware.motors.Motor.RunMode.VelocityControl;
-
 public class ShooterSys extends SubsystemBase {
     private final MotorEx motor;
     private boolean isRunning;
+    private final double runVelocity = 24.0;
+    private final double stopVelocity = 0.0;
+    private final double velocityTolerance = 0.5;
+    private final double maxVelocityTolerance = runVelocity + velocityTolerance;
+    private final double minVelocityTolerance = runVelocity - velocityTolerance;
 
-    public ShooterSys(final HardwareMap hMap, MultipleTelemetry telemetry) {
-        motor = new MotorEx(hMap, "shooter");;
+    public ShooterSys(final HardwareMap hMap) {
+        motor = new MotorEx(hMap, "shooter");
         motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
-        motor.setRunMode(VelocityControl);
+        motor.setRunMode(Motor.RunMode.VelocityControl);
+        motor.setInverted(false);
         isRunning = false;
     }
 
     public void start() {
-        motor.set(1);
+        // i believe setVelocity units are counts per revolution and the max for ultraplanetary motors is 28. we'll see if im wrong when we test. 
+        // if that is wrong, the units are probably ticks per second
+        motor.setVelocity(runVelocity);
         isRunning = true;
     }
 
     public void stop() {
-        motor.set(0);
+        motor.setVelocity(stopVelocity);
         isRunning = false;
     }
 
@@ -39,9 +45,12 @@ public class ShooterSys extends SubsystemBase {
     public double getVelocity() {
         return motor.getVelocity();
     }
-
-    public double getCorrectedVelocity() {
-        return motor.getCorrectedVelocity();
+    
+    public double getExpectedVelocity() {
+        if (isRunning) {
+            return runVelocity;
+        }
+        return stopVelocity;
     }
 
     public double getCPR() {
@@ -55,6 +64,17 @@ public class ShooterSys extends SubsystemBase {
     public double getMaxRPM() {
         return motor.getMaxRPM();
     }
+    
+    public boolean readyForRing() {
+        if (isRunning) {
+            final double currentVel = getVelocity();
+            return currentVel < maxVelocityTolerance && currentVel > minVelocityTolerance;
+        }
+        return false;
+    }
 
+    public boolean getState() {
+        return isRunning;
+    }
 
 }
