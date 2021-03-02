@@ -47,7 +47,7 @@ public class ShooterSys extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return motor.getVelocity();
+        return motor.getVelocity(AngleUnit.DEGREES);
     }
     
     public double getExpectedVelocity() {
