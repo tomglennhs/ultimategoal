@@ -7,11 +7,13 @@ import org.firstinspires.ftc.teamcode.commands.ShooterOffCmd;
 
 import org.firstinspires.ftc.teamcode.subsystems.ConveyorSys;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterSys;
+import org.firstinspires.ftc.teamcode.util.CmdManager;
 
 
 public class ShootThreeRingsCmd extends SequentialCommandGroup {
 
     public ShootThreeRingsCmd(final ShooterSys s, final ConveyorSys c) {
+//        CmdManager.register(this, );
         addCommands(
             new ShooterOnCmd(s),
             new ShootOneRingCmd(s, c),

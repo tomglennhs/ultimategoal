@@ -11,30 +11,35 @@ public class ShooterSys extends SubsystemBase {
     private final MotorEx motor;
     private boolean isRunning;
     // eventually i'll want to make these tunable by ftc dashboard
-    private final boolean invert = false;
+    public final boolean invert = false;
     // velocity is in degrees per second. the theoretical max is 36_000 deg/s since the motor has a max rpm of 6000
-    private final double runVelocity = 34_000.0;
+//    private final double runVelocity = 34_000.0;
+//    private final double stopVelocity = 0.0;
+//    private final double velocityTolerance = 50.0;
+    private final double runVelocity = 0.8;
     private final double stopVelocity = 0.0;
-    private final double velocityTolerance = 50.0;
+    private final double velocityTolerance = 0.1;
     private final double maxVelocityTolerance = runVelocity + velocityTolerance;
     private final double minVelocityTolerance = runVelocity - velocityTolerance;
 
 
     public ShooterSys(final HardwareMap hMap) {
-        motor = new MotorEx(hMap, "shooter");
-        motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
+        motor = new MotorEx(hMap, "shooter", Motor.GoBILDA.BARE);
+//        motor.setZeroPowerBehavior(Motor.ZeroPowerBehavior.FLOAT);
         motor.setRunMode(Motor.RunMode.VelocityControl);
         motor.setInverted(invert);
         isRunning = false;
     }
 
     public void start() {
-        motor.setVelocity(runVelocity, AngleUnit.DEGREES);
+//        motor.motorEx.setVelocity(runVelocity, AngleUnit.DEGREES);
+        motor.setVelocity(runVelocity);
         isRunning = true;
     }
 
     public void stop() {
-        motor.setVelocity(stopVelocity, AngleUnit.DEGREES);
+//        motor.motorEx.setVelocity(stopVelocity, AngleUnit.DEGREES);
+        motor.setVelocity(stopVelocity);
         isRunning = false;
     }
 
@@ -47,7 +52,9 @@ public class ShooterSys extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return motor.motorEx.getVelocity(AngleUnit.DEGREES);
+
+//        return motor.motorEx.getVelocity(AngleUnit.DEGREES);
+        return motor.getVelocity();
     }
     
     public double getExpectedVelocity() {
