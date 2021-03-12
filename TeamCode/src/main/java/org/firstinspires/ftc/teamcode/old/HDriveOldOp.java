@@ -1,24 +1,21 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.hardware.lynx.LynxModule;
-import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.TempClaw;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.arcrobotics.ftclib.util.MathUtils;
-import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
-import java.util.Iterator;
+
 import java.util.List;
 
-@TeleOp(name = "HDrive Teleop", group = "HDrive")
-public class HDrive extends LinearOpMode {
+@TeleOp(name = "HDrive Teleop (old)", group = "HDrive")
+public class HDriveOldOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
