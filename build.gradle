@@ -10,6 +10,7 @@ configurations {
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         google()
         jcenter()
@@ -23,6 +24,7 @@ buildscript {
 // google() repository beginning with version 3.2 of the Android Gradle Plugin
 allprojects {
     repositories {
+        mavenLocal()
         mavenCentral()
         google()
         jcenter()
@@ -30,8 +32,8 @@ allprojects {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
-
     flatDir {
         dirs '../libs'
     }

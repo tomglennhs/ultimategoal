@@ -1,5 +1,6 @@
 
 repositories {
+    mavenLocal()
     mavenCentral()
     google() // Needed for androidx
     jcenter()  // Needed for tensorflow-lite
