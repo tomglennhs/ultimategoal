@@ -36,8 +36,7 @@ public class HDriveSys extends SubsystemBase {
     }
 
     public void driveDist(double inchDistance, double pwr) {
-        double offset = getAverageEncoderDistance();
-        while (getAverageEncoderDistance()-offset <= inchDistance) {
+        while (getAverageEncoderDistance() <= inchDistance) {
             dt.arcadeDrive(pwr, 0);
         }
         dt.arcadeDrive(0,0);
