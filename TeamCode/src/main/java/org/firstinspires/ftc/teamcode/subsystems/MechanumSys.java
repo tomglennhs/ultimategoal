@@ -21,12 +21,12 @@ public class MechanumSys extends SubsystemBase {
         br = new MotorEx(hMap, "BR");
         bl = new MotorEx(hMap, "BL");
 
-        bl.setInverted(false);
-        fl.setInverted(false);
+        bl.setInverted(true);
+        fl.setInverted(true);
         fr.setInverted(false);
         br.setInverted(false);
-        leftEnc = fl.encoder;
-        rightEnc = fr.encoder;
+        leftEnc = bl.encoder;
+        rightEnc = br.encoder;
 
         resetEncoders();
         dt = new MecanumDrive(fl, fr, bl, br);
@@ -37,8 +37,7 @@ public class MechanumSys extends SubsystemBase {
     }
 
     public void driveDist(double inchDistance, double pwr) {
-        double offset = getAverageEncoderDistance();
-        while (getLeftEncoderDistance()-offset <= inchDistance) {
+        while (getAverageEncoderDistance() <= inchDistance) {
             dt.driveRobotCentric(0, pwr, 0);
         }
         dt.driveRobotCentric(0, pwr, 0);
