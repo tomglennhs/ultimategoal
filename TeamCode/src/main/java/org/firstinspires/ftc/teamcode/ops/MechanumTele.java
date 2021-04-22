@@ -20,7 +20,7 @@ import com.arcrobotics.ftclib.command.button.GamepadButton;
 @TeleOp(name = "Mechanum Teleop (FTCLib)", group = "Mechanum")
 public class MechanumTele extends CommandOpMode {
     private MechanumSys drivetrain;
-//    private ClawSys clawSys;
+    private ClawSys clawSys;
     private GamepadEx driverOp;
     private GamepadEx toolOp;
     private MechanumCmd driveCmd;
@@ -32,13 +32,12 @@ public class MechanumTele extends CommandOpMode {
         driverOp = new GamepadEx(gamepad1);
         toolOp = new GamepadEx(gamepad2);
         drivetrain = new MechanumSys(hardwareMap);
-//        clawSys = new ClawSys(hardwareMap);
+        clawSys = new ClawSys(hardwareMap);
         driveCmd = new MechanumCmd(drivetrain, driverOp);
 
-//        GamepadButton clawCtrl = new GamepadButton(toolOp, GamepadKeys.Button.A);
-//        GamepadButton clawCtrlBackup = new GamepadButton(driverOp, GamepadKeys.Button.A);
-//
-//        clawCtrl.or(clawCtrlBackup).whenActive(new OpenClawCmd(clawSys)).whenInactive(new CloseClawCmd(clawSys));
+        GamepadButton clawCtrl = new GamepadButton(toolOp, GamepadKeys.Button.A);
+        GamepadButton clawCtrlBackup = new GamepadButton(driverOp, GamepadKeys.Button.A);
+        clawCtrl.or(clawCtrlBackup).whenActive(new OpenClawCmd(clawSys)).whenInactive(new CloseClawCmd(clawSys));
 
         // bindings
 

@@ -29,7 +29,7 @@ public class MechanumSys extends SubsystemBase {
         rightEnc = br.encoder;
 
         resetEncoders();
-        dt = new MecanumDrive(fl, fr, bl, br);
+        dt = new MecanumDrive(false, fl, fr, bl, br);
     }
 
     public void drive(double fwd, double strafe, double turn) {
