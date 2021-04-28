@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@TeleOp(name = "SensorTesting20201010 but in Java", group = "Testing")
+//@TeleOp(name = "SensorTesting20201010 but in Java", group = "Testing")
 public class JavaSensorTest extends LinearOpMode {
 
     private ColorSensor sensorColorRange_REV_ColorRangeSensor;

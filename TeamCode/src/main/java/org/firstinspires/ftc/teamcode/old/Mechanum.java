@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "Mechanum", group = "FTCLib - Java")
+@TeleOp(name = "Mechanum (Old)", group = "FTCLib - Java")
 public class Mechanum extends LinearOpMode {
 
     public enum Intake {

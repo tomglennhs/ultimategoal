@@ -8,7 +8,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-@TeleOp(name="Gamepad Test")
+@TeleOp(name="Gamepad Test", group = "Test")
 public class GamepadTest extends LinearOpMode {
     Telemetry tele;
     boolean graph;
