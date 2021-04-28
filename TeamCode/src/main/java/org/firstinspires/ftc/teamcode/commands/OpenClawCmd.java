@@ -21,7 +21,7 @@ public class OpenClawCmd extends CommandBase {
     }
 
     public boolean shouldRun() {
-        return !ss.isOpen();
+        return ss.isClosed();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class OpenClawCmd extends CommandBase {
         if (!shouldRun()) {
             return true;
         }
-        return System.currentTimeMillis() - start >= openMs; 
+        return System.currentTimeMillis() - start >= openMs;
     }
 
 }
