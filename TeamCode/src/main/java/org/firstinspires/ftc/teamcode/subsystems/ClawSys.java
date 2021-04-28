@@ -1,22 +1,19 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
-import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.arcrobotics.ftclib.hardware.motors.Motor.Encoder;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class ClawSys extends SubsystemBase {
-    private final double speedMultiplier = 0.25;
-    private final double clawOpen = 0.96;
-    private final double clawClose = 0.5;
-    private final ServoEx grabber;
+    private final double speedMultiplier = 0.5;
+    private final double clawOpen = 0.7;
+    private final double clawClose = 0;
+    private final Servo grabber;
     private final MotorEx angle;
 
     public ClawSys(final HardwareMap hMap) {
-        grabber = (ServoEx) hMap.get(Servo.class, "claw");
+        grabber = hMap.get(Servo.class, "claw");
         angle = new MotorEx(hMap, "angleSpeed");;
         angle.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
     }
