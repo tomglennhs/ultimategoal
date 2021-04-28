@@ -6,8 +6,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 
-import org.firstinspires.ftc.teamcode.commands.ClawCtrlCmd;
-import org.firstinspires.ftc.teamcode.commands.MechanumCmd;
+import org.firstinspires.ftc.teamcode.commands.claw.ClawCtrlCmd;
+import org.firstinspires.ftc.teamcode.commands.mechanum.MechanumCmd;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSys;
 import org.firstinspires.ftc.teamcode.subsystems.MechanumSys;
 

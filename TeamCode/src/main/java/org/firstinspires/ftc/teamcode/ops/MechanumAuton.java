@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.commands.MechanumDriveDistCmd;
+import org.firstinspires.ftc.teamcode.commands.mechanum.MechanumDriveDistCmd;
 import org.firstinspires.ftc.teamcode.subsystems.MechanumSys;
 
 @TeleOp(name = "Mechanum Auton (FTCLib)", group = "Mechanum")

@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode.commands;
+package org.firstinspires.ftc.teamcode.commands.claw;
 
-import org.firstinspires.ftc.teamcode.commands.OpenClawCmd;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSys;
 
 // work smarter not harder ;)

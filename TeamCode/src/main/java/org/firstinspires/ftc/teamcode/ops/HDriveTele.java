@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.commands.HDriveCmd;
-import org.firstinspires.ftc.teamcode.commands.OpenClawCmd;
-import org.firstinspires.ftc.teamcode.commands.CloseClawCmd;
+import org.firstinspires.ftc.teamcode.commands.claw.OpenClawCmd;
+import org.firstinspires.ftc.teamcode.commands.claw.CloseClawCmd;
 import org.firstinspires.ftc.teamcode.subsystems.HDriveSys;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSys;
 

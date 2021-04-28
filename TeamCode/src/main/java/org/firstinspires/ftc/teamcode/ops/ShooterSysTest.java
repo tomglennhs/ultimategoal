@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.ops;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.commands.TestShooterCmd;
+import org.firstinspires.ftc.teamcode.commands.shooter.TestShooterCmd;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterSys;
 
 //@TeleOp(name="Shooter Subsystem Test (FTCLib, Dashboard Graphing)")

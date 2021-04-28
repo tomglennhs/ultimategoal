@@ -1,9 +1,6 @@
-package org.firstinspires.ftc.teamcode.commands;
+package org.firstinspires.ftc.teamcode.commands.shooter;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
-import org.firstinspires.ftc.teamcode.commands.ShootOneRingCmd;
-import org.firstinspires.ftc.teamcode.commands.ShooterOnCmd;
-import org.firstinspires.ftc.teamcode.commands.ShooterOffCmd;
 
 import org.firstinspires.ftc.teamcode.subsystems.ConveyorSys;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterSys;
