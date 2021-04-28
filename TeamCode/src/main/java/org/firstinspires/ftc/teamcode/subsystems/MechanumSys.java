@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.drivebase.DifferentialDrive;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
@@ -22,9 +21,9 @@ public class MechanumSys extends SubsystemBase {
         bl = new MotorEx(hMap, "BL");
 
         bl.setInverted(true);
-        fl.setInverted(true);
+        fl.setInverted(false);
         fr.setInverted(false);
-        br.setInverted(false);
+        br.setInverted(true);
         leftEnc = bl.encoder;
         rightEnc = br.encoder;
 
