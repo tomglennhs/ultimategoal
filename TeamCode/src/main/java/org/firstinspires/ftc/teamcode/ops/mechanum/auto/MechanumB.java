@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.commands.mechanum.MechanumDriveDistCmd;
 import org.firstinspires.ftc.teamcode.subsystems.MechanumSys;
 
-@TeleOp(name = "Mechanum Auton B (FTCLib)", group = "Mechanum")
+@Autonomous(name = "Mechanum Auton B (FTCLib)", group = "Mechanum")
 public class MechanumB extends CommandOpMode {
     @Override
     public void initialize() {
